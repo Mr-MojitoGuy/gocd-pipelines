@@ -1,7 +1,7 @@
 format_version: 10  # ✅ Versão do formato YAML do GoCD 
 
 pipelines:
-  cat-facts:  # ✅ Nome da pipeline (vai aparecer no dashboard do GoCD)
+  cat-facts_with_yaml:  # ✅ Nome da pipeline (vai aparecer no dashboard do GoCD)
     group: cat_facts_demo_yaml  # ✅ Grupo a que pertence 
     label_template: "${COUNT}"  # ✅ Etiqueta automática por build (incrementa)
     lock_behavior: none
