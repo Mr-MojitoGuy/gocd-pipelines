@@ -1,0 +1,22 @@
+format_version: 10  # ✅ Versão do formato YAML do GoCD 
+
+pipelines:
+  cat-facts:  # ✅ Nome da pipeline (vai aparecer no dashboard do GoCD)
+    group: cat_facts_demo_yaml  # ✅ Grupo a que pertence 
+    label_template: "${COUNT}"  # ✅ Etiqueta automática por build (incrementa)
+    lock_behavior: none
+    
+    materials:
+      mr_mojito_repo:  # ✅ Nome interno do material (referência)
+        git: https://github.com/Mr-MojitoGuy/gocd-demo-with-minikube.git
+        branch: branch-a
+    
+    stages:
+      - run-python-script:  # ✅ Nome do stage (pode haver vários por pipeline)
+          jobs:
+            run-script:  # ✅ Nome do job (contém tasks)
+              tasks:
+                - exec:  # ✅ Comando a executar
+                    command: python3
+                    arguments:
+                      - cat_facts.py
