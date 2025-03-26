@@ -3,7 +3,7 @@ format_version: 10
 pipelines:
   cat-facts-advanced:
     group: cat-facts-advanced
-    label_template: "${COUNT}-${git[:7]}"
+    label_template: "${COUNT}-${repo[:7]}"
     lock_behavior: none
     
     materials:
