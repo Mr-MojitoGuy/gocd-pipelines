@@ -46,6 +46,6 @@ pipelines:
                       - cat_facts.py 
               artifacts:
                 - build:
-                    source: output.log
+                    source: advanced-scripts/output.log
                     destination: logs
 
