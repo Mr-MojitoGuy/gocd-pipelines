@@ -1,0 +1,51 @@
+format_version: 10
+
+pipelines:
+  cat-facts-advanced:
+    group: cat-facts-advanced
+    label_template: "${COUNT}-${git[:7]}"
+    lock_behavior: none
+    
+    materials:
+      repo:
+        git: https://github.com/Mr-MojitoGuy/gocd-demo-with-minikube.git
+        branch: branch-a
+    
+    stages:
+      - validate:
+          jobs:
+            lint:
+              tasks:
+                - exec:
+                    working_directory: advanced-scripts/
+                    command: flake8
+                    arguments:
+                      - cat_facts.py
+            test:
+              tasks:
+                - exec:
+                    working_directory: advanced-scripts/
+                    command: sh
+                    arguments:
+                      - -c
+                      - |
+                        pytest > test_results.txt
+              artifacts:
+                - build:
+                    source: test_results.txt
+                    destination: results
+
+      - run-script:
+          jobs:
+            run:
+              tasks:
+                - exec:
+                    working_directory: advanced-scripts/
+                    command: python3
+                    arguments:
+                      - cat_facts.py 
+              artifacts:
+                - build:
+                    source: output.log
+                    destination: logs
+

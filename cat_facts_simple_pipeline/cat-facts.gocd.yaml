@@ -17,6 +17,7 @@ pipelines:
             run-script:  # ✅ Nome do job (contém tasks)
               tasks:
                 - exec:  # ✅ Comando a executar
+                    working_directory: basic-scripts/
                     command: python3
                     arguments:
                       - cat_facts.py
